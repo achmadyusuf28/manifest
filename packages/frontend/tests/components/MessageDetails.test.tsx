@@ -248,7 +248,7 @@ describe('MessageDetails', () => {
     mockGetMessageDetails.mockResolvedValue(summaryResponse);
     const { container } = render(() => <MessageDetails messageId="msg-1" />);
     await vi.waitFor(() => {
-      expect(container.textContent).toContain('Message');
+      expect(container.textContent).toContain('Request');
       expect(container.textContent).toContain('Provider');
       expect(container.textContent).toContain('OpenAI');
     });
@@ -429,7 +429,7 @@ describe('MessageDetails', () => {
     mockGetMessageDetails.mockResolvedValue(detailsResponse);
     const { container } = render(() => <MessageDetails messageId="msg-1" />);
     await vi.waitFor(() => {
-      expect(container.textContent).toContain('Message');
+      expect(container.textContent).toContain('Request');
     });
     const labels = Array.from(container.querySelectorAll('.msg-detail__meta-label')).map(
       (n) => n.textContent,
@@ -574,7 +574,7 @@ describe('MessageDetails', () => {
     mockGetMessageDetails.mockResolvedValue(noHeaders);
     const { container } = render(() => <MessageDetails messageId="msg-1" />);
     await vi.waitFor(() => {
-      expect(container.textContent).toContain('Message');
+      expect(container.textContent).toContain('Request');
     });
     expect(container.textContent).not.toContain('Request Headers');
   });
@@ -587,7 +587,7 @@ describe('MessageDetails', () => {
     mockGetMessageDetails.mockResolvedValue(empty);
     const { container } = render(() => <MessageDetails messageId="msg-1" />);
     await vi.waitFor(() => {
-      expect(container.textContent).toContain('Message');
+      expect(container.textContent).toContain('Request');
     });
     expect(container.textContent).not.toContain('Request Headers');
   });
@@ -602,7 +602,7 @@ describe('MessageDetails', () => {
     await vi.waitFor(() => {
       // With model=null, inferProviderName isn't called and `Provider` MetaField
       // renders nothing (value is null).
-      expect(container.textContent).toContain('Message');
+      expect(container.textContent).toContain('Request');
       expect(container.textContent).not.toContain('Provider');
       expect(container.textContent).not.toContain('Model ID');
     });
@@ -752,7 +752,7 @@ describe('MessageDetails', () => {
       mockGetMessageDetails.mockResolvedValue(detailsResponse);
       const { container } = render(() => <MessageDetails messageId="msg-1" />);
       await vi.waitFor(() => {
-        expect(container.textContent).toContain('Message');
+        expect(container.textContent).toContain('Request');
       });
       expect(container.textContent).not.toContain('Model Parameters');
     });
@@ -765,7 +765,7 @@ describe('MessageDetails', () => {
       mockGetMessageDetails.mockResolvedValue(nullParams);
       const { container } = render(() => <MessageDetails messageId="msg-1" />);
       await vi.waitFor(() => {
-        expect(container.textContent).toContain('Message');
+        expect(container.textContent).toContain('Request');
       });
       expect(container.textContent).not.toContain('Model Parameters');
     });
@@ -778,7 +778,7 @@ describe('MessageDetails', () => {
       mockGetMessageDetails.mockResolvedValue(emptyParams);
       const { container } = render(() => <MessageDetails messageId="msg-1" />);
       await vi.waitFor(() => {
-        expect(container.textContent).toContain('Message');
+        expect(container.textContent).toContain('Request');
       });
       expect(container.textContent).not.toContain('Model Parameters');
     });
