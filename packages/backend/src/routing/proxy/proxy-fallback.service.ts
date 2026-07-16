@@ -606,9 +606,7 @@ export class ProxyFallbackService {
     // (e.g. x-parkee-model) to select the upstream endpoint.
     let modelExtraHeaders: Record<string, string> | undefined;
     if (customProvider) {
-      const modelMatch = customProvider.models?.find(
-        (m) => m.model_name === forwardModel,
-      );
+      const modelMatch = customProvider.models?.find((m) => m.model_name === forwardModel);
       if (modelMatch?.headers && Object.keys(modelMatch.headers).length > 0) {
         modelExtraHeaders = modelMatch.headers;
       }
@@ -648,7 +646,7 @@ export class ProxyFallbackService {
 
     return this.providerClient.forward({
       provider,
-      apiKey: ***
+      apiKey: effectiveKey,
       model: forwardModel,
       body,
       chatBody,
