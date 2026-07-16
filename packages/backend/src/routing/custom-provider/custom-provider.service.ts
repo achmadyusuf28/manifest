@@ -528,6 +528,9 @@ export class CustomProviderService {
       if (outputPrice !== undefined) enriched.output_price_per_million_tokens = outputPrice;
       if (contextWindow !== undefined) enriched.context_window = contextWindow;
       if (priceEstimated) enriched.price_estimated = true;
+      if (model.headers && Object.keys(model.headers).length > 0) {
+        enriched.headers = { ...model.headers };
+      }
       return enriched;
     });
   }

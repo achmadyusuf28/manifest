@@ -600,6 +600,23 @@ export class ProxyFallbackService {
       logger: this.logger,
     });
 
+    // Custom provider per-model headers: if the custom provider's model list
+    // includes a headers field for the matched model, attach them as extra
+    // forward headers. This enables proxy routers that use custom headers
+    // (e.g. x-parkee-model) to select the upstream endpoint.
+    let modelExtraHeaders: Record<string, string> | undefined;
+    if (customProvider) {
+      const modelMatch = customProvider.models?.find(
+        (m) => m.model_name === forwardModel,
+      );
+      if (modelMatch?.headers && Object.keys(modelMatch.headers).length > 0) {
+        modelExtraHeaders = modelMatch.headers;
+      }
+    }
+    const resolvedExtraHeaders = modelExtraHeaders
+      ? { ...extraHeaders, ...modelExtraHeaders }
+      : extraHeaders;
+
     const reasoningEndpointKey =
       customEndpoint && customEndpoint.format !== 'openai'
         ? null
@@ -631,13 +648,13 @@ export class ProxyFallbackService {
 
     return this.providerClient.forward({
       provider,
-      apiKey: effectiveKey,
+      apiKey: ***
       model: forwardModel,
       body,
       chatBody,
       stream,
       signal,
-      extraHeaders,
+      extraHeaders: resolvedExtraHeaders,
       customEndpoint,
       authType,
       apiMode: opts.apiMode,

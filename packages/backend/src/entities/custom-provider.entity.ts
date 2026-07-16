@@ -7,6 +7,8 @@ export interface CustomProviderModel {
   output_price_per_million_tokens?: number;
   context_window?: number;
   price_estimated?: boolean;
+  /** Custom HTTP headers to attach when forwarding requests to this model. */
+  headers?: Record<string, string>;
 }
 
 export type CustomProviderApiKind = 'openai' | 'anthropic';

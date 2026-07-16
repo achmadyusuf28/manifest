@@ -14,6 +14,7 @@ import {
   IsIn,
   Min,
   IsBoolean,
+  IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -48,6 +49,10 @@ export class CustomProviderModelDto {
   @IsOptional()
   @IsBoolean()
   price_estimated?: boolean;
+
+  @IsOptional()
+  @IsObject()
+  headers?: Record<string, string>;
 }
 
 export class CreateCustomProviderDto {
